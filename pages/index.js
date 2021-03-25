@@ -4,13 +4,7 @@ import { MainLayout } from "../components/MainLayout";
 
 export default function Index() {
   return (
-    <MainLayout>
-      <Head>
-        <title>Next title</title>
-        <meta name="keywords" content="next, javascript, nextjs, react" />
-        <meta name="description" content="this is youtube turtorial" />
-        <meta charSet="utf-8" />
-      </Head>
+    <MainLayout title="Home  Page">
       <h1>Hello Next.JS!</h1>
       <p>
         <Link href="/about">
