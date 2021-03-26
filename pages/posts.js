@@ -3,17 +3,28 @@ import { MainLayout } from "../components/MainLayout";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-export default function Posts({ posts }) {
-  // const [posts, setPosts] = useState();
+export default function Posts({ posts: serverPost }) {
+  const [posts, setPosts] = useState(serverPost);
 
-  // useEffect(() => {
-  //   async function load() {
-  //     const response = await fetch("http://localhost:4200/posts");
-  //     const json = await response.json();
-  //     setPosts(json);
-  //   }
-  //   load();
-  // }, []);
+  useEffect(() => {
+    async function load() {
+      const response = await fetch("http://localhost:4200/posts");
+      const json = await response.json();
+      setPosts(json);
+    }
+
+    if (!serverPost) {
+      return load();
+    }
+  }, []);
+
+  if (!posts) {
+    return (
+      <MainLayout>
+        <p>Loading...</p>
+      </MainLayout>
+    );
+  }
 
   return (
     <MainLayout>
@@ -34,7 +45,12 @@ export default function Posts({ posts }) {
   );
 }
 
-Posts.getInitialProps = async () => {
+Posts.getInitialProps = async ({ req }) => {
+  if (!req) {
+    return {
+      posts: null,
+    };
+  }
   const response = await fetch("http://localhost:4200/posts");
   const posts = await response.json();
 
