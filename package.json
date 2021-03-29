@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "serve": "concurrently \"yarn dev\" \"yarn mock\"",
-    "mock": "json-server -w db.json -p 4200 -d 1750"
+    "mock": "json-server -w db.json -p 4200 -d 750"
   },
   "dependencies": {
     "concurrently": "^6.0.0",
